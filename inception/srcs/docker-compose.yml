@@ -1,0 +1,15 @@
+#+++++++++++++++++++++++++++++++++++++++++++++
+#	
+#		INCEPTION DOCKER COMPOSE FILE	
+#
+#+++++++++++++++++++++++++++++++++++++++++++++
+
+name: inception
+
+services:
+  nginx:
+    build: ./requirements/nginx
+    container_name: nginx
+    ports:
+      - "8080:80"
+    restart: always
