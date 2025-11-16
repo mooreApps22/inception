@@ -1,0 +1,16 @@
+
+
+/*
+	fixed
+	local
+	scroll
+	inherit
+	initial
+	unset
+*/
+
+body{
+	background: linear-gradient(75deg in hsl shorter hue, gold, #000080);
+	background-repeat: no-repeat;
+	background-attachment: fixed; 
+}

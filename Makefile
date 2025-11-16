@@ -2,7 +2,8 @@ YAM = ./srcs/docker-compose.yml
 ENV = ./.env
 
 all:
-	@printf "Be more specific\n"
+	docker compose -f $(YAM) down
+	docker compose -f $(YAM) up -d --build
 up:
 	docker compose -f $(YAM) up --build
 upd:

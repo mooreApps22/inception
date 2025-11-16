@@ -6,7 +6,11 @@ RUN apk add --no-cache nginx \
 COPY nginx.conf /etc/nginx/nginx.conf
 
 COPY index.html /usr/share/nginx/html/index.html
-COPY pg1.html /usr/share/nginx/html/pg1.html
+COPY styles.css /usr/share/nginx/html/styles.css
+COPY /images/circle.png /usr/share/nginx/html/circle.png
+COPY /images/triangle.png /usr/share/nginx/html/triangle.png
+COPY /images/square.png /usr/share/nginx/html/square.png
+COPY /images/portal.jpg /usr/share/nginx/html/portal.jpg
 
 EXPOSE 80
 

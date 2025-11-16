@@ -1,0 +1,49 @@
+.press_start{
+	font-family: "Press Start 2P", system-ui;
+}
+
+body{
+	background-image: url("portal.jpg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
+	display: flow-root;
+}
+
+a:link{
+	color: #ff746c;
+}
+a:visited{
+	color: #e0cd95;
+}
+a:hover{
+	color: #FF68CE;
+}
+a:active{
+	color: #FF00FF;
+}
+
+button:hover{
+	background-color: #FF68CE;
+	color: #FFFFFF;
+}
+button:active{
+	color: #ff00ff;
+	background-color: #ffffff;
+}
+ul{
+	color: orange;
+}
+li{
+	color: #ff68ce;
+}
+li:hover{
+	color: #ff00ff;	
+}
+li:nth-child(even){
+	background-color: #ffcccc;
+}
+li:nth-child(odd){
+	background-color: #ff0099;
+}

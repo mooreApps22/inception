@@ -1,0 +1,118 @@
+body{
+	background-image: url("portal2.jpg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
+	border: 2px solid;
+	margin: 40px;
+}
+
+h1{
+	color: #FFEE00;
+	font-family: "Press Start 2P", system-ui;
+	border-width: 10px;
+	border-style: solid;
+	border-radius: 10px;
+	padding: 5px;
+	text-align: center;
+}
+
+p{
+	font-family: "Press Start 2P", system-ui;
+	color: #999733;
+	padding: 5px;
+}
+
+.odd{
+	background: linear-gradient(to right, #00FFE0, #EFF000);
+	color: #FFFFFF;
+	font-style: italic;
+	border-bottom-style: dashed;
+	border-width: 5px;
+	padding: 1px;
+}
+.even{
+	color: #ff6630;
+	font-weight: bold;
+	border-bottom-style: dotted;
+	border-width: 10px;
+	padding: 5px;
+}
+#p1{
+	color: #ff6633;
+	text-decoration: wavy underline;
+	border-left-style: double;
+	border-right-style: double;
+	border-bottom-style: double;
+	border-width: 10px;
+	padding: 5px;
+}
+#p2{
+	color: #ff6632;
+	border-style: ridge;
+	border-width: 10px;
+	padding: 5px;
+}
+#p3{
+	color: #ff6631;
+	border-style: groove;
+	border-width: 10px;
+	padding: 5px;
+}
+#p4{
+	color: #341539;
+	border-style: outset;
+	border-width: 10px;
+	padding: 5px;
+}
+strong{
+	color: #F0FF0F;
+}
+
+#box1{
+	border: 5px solid;
+	width: 250px;
+	height: 50px;
+	font-size: 22px;
+	background: pink;
+	margin-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 40px;
+}
+
+#box2{
+	border: 5px solid;
+	width: 250px;
+	height: 50px;
+	font-size: 22px;
+	background: orange;
+	margin-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 40px;
+}
+
+img{
+	float:left; 
+}
+.boxer{
+	width: 100px;
+	height: 100px;
+	border: 1px solid;
+	font-size: 40px;
+	text-align: center;
+	background: tomato;
+	float: right;
+}
+h2{
+	clear: left;
+	color: #FFEE00;
+	font-family: "Press Start 2P", system-ui;
+	border-width: 20px;
+	border-style: solid;
+	border-radius: 20px;
+	padding: 20px;
+	text-align: center;
+}

@@ -1,0 +1,40 @@
+.press_start{
+	font-family: "Press Start 2P", system-ui;
+}
+
+body{
+	background-image: url("portal.jpg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
+	border: 4px solid;
+	display: flow-root;
+}
+
+p{
+	color: #ffcccb;
+	font-family: "Press Start 2P", system-ui;
+	font-size: 12px;;
+}
+
+#box1{
+	color: #ffcccb;
+	border: 1px solid;	
+	height: 300px;
+	width: 300px;
+	background-color: #b5a642;
+	position: sticky;
+	top: 0px;
+	bottom: 0px;
+}
+#box2{
+	color: #7d1211;
+	border: 1px solid;	
+	height: 100px;
+	width: 100px;
+	background-color: #ffd700;
+	position: absolute;
+	top: 100px;
+	left: 100px;
+}
