@@ -1,10 +1,6 @@
 <?php
-echo "<h1>I love pizza!</h1>";
-echo "It's really good! <br>";
-// <br> means page break
-echo "It's really, really good!";
+	$thing = "pizza";
 ?>
-
 <!doctype html>
 
 <html lang="en">
@@ -19,9 +15,10 @@ echo "It's really, really good!";
 </head>
 
 <body>
-	<br>
+	<h1>I love <?php echo $thing?></h1>"
+	<p>I really love <?php echo $thing?></p>"
 	<a href="/index.html">
-		<button>order pizza</button>
+		<button>order <?php echo $thing?></button>
 	</a>
 </body>
 
