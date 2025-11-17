@@ -14,18 +14,19 @@ services:
       - "8080:80"
     depends_on:
       - wordpress
-    volumes:
-      - wordpress_data:/var/www/html
     restart: always
+    networks:
+      - inception
 
   wordpress:
     build: ./requirements/wordpress
     container_name: wordpress 
     expose:
       - "9000"
-    volumes:
-      - wordpress_data:/var/www/html
     restart: always
+    networks:
+      - inception
 
-volumes:
-  wordpress_data:
+networks:
+  inception:
+    driver: bridge

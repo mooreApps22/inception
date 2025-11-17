@@ -1,16 +1,12 @@
 FROM alpine:3.20
 
 RUN apk add --no-cache nginx \
-	&& mkdir -p /run/nginx /usr/share/nginx/html
+	&& mkdir -p /run/nginx /var/www/html
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
-COPY index.html /usr/share/nginx/html/index.html
-COPY styles.css /usr/share/nginx/html/styles.css
-COPY /images/circle.png /usr/share/nginx/html/circle.png
-COPY /images/triangle.png /usr/share/nginx/html/triangle.png
-COPY /images/square.png /usr/share/nginx/html/square.png
-COPY /images/portal.jpg /usr/share/nginx/html/portal.jpg
+COPY index.html /var/www/html/index.html
+COPY styles.css /var/www/html/styles.css
 
 EXPOSE 80
 

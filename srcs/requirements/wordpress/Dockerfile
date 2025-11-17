@@ -13,6 +13,8 @@ RUN apk add --no-cache \
 	php83-gd \
 	php83-ctype 
 
+RUN addgroup -S nginx && adduser -S -G nginx nginx
+
 RUN mkdir -p /var/www/html
 
 COPY www.conf /etc/php83/php-fpm.d/www.conf

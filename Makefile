@@ -19,3 +19,7 @@ logs:
 	docker compose -f $(YAM) logs
 prune:
 	docker builder prune --all
+# Commands
+#  nginx -t : checks nginx.conf file validity
+check_nginx:
+	docker exec -it nginx /bin/sh
