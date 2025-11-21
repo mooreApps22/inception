@@ -1,9 +1,7 @@
 #!/bin/sh
 set -e
 
-CN="smoore.42.fr"
-EMAIL="skyymoore@gmail.com"
-
+mkdir -p /etc/nginx/ssl
 
 openssl genrsa -out /etc/nginx/ft_private.key 2048
 
@@ -15,4 +13,4 @@ openssl req \
 	-key /etc/nginx/ft_private.key \
 	-out /etc/nginx/ft_cert.crt \
 	-days 365 \
-	-subj "/C=US/ST=California/L=Los Angeles/O=42 London/OU=Common Core/CN=$CN/emailAddress=$EMAIL"
+	-subj "$SSL_SUBJECT"

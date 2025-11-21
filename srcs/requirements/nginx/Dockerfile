@@ -1,5 +1,8 @@
 FROM alpine:3.20
 
+ARG SSL_SUBJECT
+ENV SSL_SUBJECT=${SSL_SUBJECT}
+
 RUN apk add --no-cache nginx \
 	&& mkdir -p /run/nginx /var/www/ft
 

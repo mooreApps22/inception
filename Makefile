@@ -1,18 +1,18 @@
 YAM = ./srcs/docker-compose.yml
-ENV = ./.env
+ENV = --env-file ./.env
 
 all:
-	docker compose -f $(YAM) down
-	docker compose -f $(YAM) up -d --build
+	docker compose $(ENV) -f $(YAM) down
+	docker compose $(ENV) -f $(YAM) up -d --build
 up:
-	docker compose -f $(YAM) up --build
+	docker compose $(ENV) -f $(YAM) up --build
 upd:
-	docker compose -f $(YAM) up -d --build
+	docker compose $(ENV) -f $(YAM) up -d --build
 down:
-	docker compose -f $(YAM) down
+	docker compose $(ENV) -f $(YAM) down
 restart:
 	docker compose -f $(YAM) down
-	docker compose -f $(YAM) up -d --build
+	docker compose $(ENV) -f $(YAM) up -d --build
 ps:
 	docker compose -f $(YAM) ps 
 logs:
@@ -28,5 +28,3 @@ check_wordpress:
 eval_ssh_add:
 	eval "$(ssh-agent -s)"
 	ssh-add ~/.ssh/id_ed25519
-
-
