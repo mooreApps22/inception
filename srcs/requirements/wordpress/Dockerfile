@@ -15,11 +15,11 @@ RUN apk add --no-cache \
 
 RUN addgroup -S nginx && adduser -S -G nginx nginx
 
-RUN mkdir -p /var/www/html
+RUN mkdir -p /var/www/ft/
 
 COPY www.conf /etc/php83/php-fpm.d/www.conf
 
-COPY index.php /var/www/html/index.php
+COPY index.php /var/www/ft/index.php
 
 EXPOSE 9000
 

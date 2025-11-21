@@ -23,3 +23,10 @@ prune:
 #  nginx -t : checks nginx.conf file validity
 check_nginx:
 	docker exec -it nginx /bin/sh
+check_wordpress:
+	docker exec -it wordpress /bin/sh
+eval_ssh_add:
+	eval "$(ssh-agent -s)"
+	ssh-add ~/.ssh/id_ed25519
+
+
