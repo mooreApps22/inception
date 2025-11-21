@@ -75,6 +75,24 @@ button{
 	animation-timing-function: ease-in-out;
 	animation-iteration-count: 1;
 }
+
+label{
+	border: none;
+	font-family: "Press Start 2P", system-ui;
+	font-size: 50px;
+	color: var(--ruby);
+	background: var(--electric_yel);
+	box-shadow: -5px -5px 5px var(--pur);
+	margin-top: 100px;
+	margin-left: auto;	
+	margin-right: auto;	
+	display: block;
+
+	animation-name: fade_in;
+	animation-duration: 1s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+}
 button:hover{
 	color: var(--neon_mag);
 	text-shadow: -2px -2px 5px var(--aqua_teal);

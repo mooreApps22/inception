@@ -13,6 +13,8 @@ RUN apk add --no-cache \
 	php83-gd \
 	php83-ctype 
 
+RUN echo "display_errors = On" >> /etc/php83/php.ini
+
 RUN addgroup -S nginx && adduser -S -G nginx nginx
 
 RUN mkdir -p /var/www/ft/

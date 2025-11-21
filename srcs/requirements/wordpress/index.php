@@ -1,6 +1,3 @@
-<?php
-	$thing = "pizza";
-?>
 <!doctype html>
 
 <html lang="en">
@@ -15,11 +12,21 @@
 </head>
 
 <body>
-	<h1>I love <?php echo $thing?></h1>"
-	<p>I really love <?php echo $thing?></p>"
-	<a href="/index.html">
-		<button>order <?php echo $thing?></button>
-	</a>
 </body>
+	<form action="index.php" method="post">
+		<label>Quantity: </label><br>
+		<input type="text" name="quantity">
+		<input type="submit" value="total">
+	</form>
 
 </html>
+<?php
+	$item = "pizza";
+	$price = 5.99;
+	$quantity = $_POST["quantity"];
+	$total = null;
+
+	echo "<p>You have ordered <strong>{$quantity}</strong> {$item}s</p>";
+	$total = $price * $quantity;
+	echo "<p>Your total is <strong>\${$total}</strong></p>";
+?>
