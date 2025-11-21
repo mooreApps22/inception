@@ -14,19 +14,24 @@
 <body>
 </body>
 	<form action="index.php" method="post">
-		<label>Quantity: </label><br>
-		<input type="text" name="quantity">
+		<label>x:</label>
+		<input type="text" name="x">
+		<label>y:</label>
+		<input type="text" name="y"><br>
 		<input type="submit" value="total">
 	</form>
 
 </html>
 <?php
-	$item = "pizza";
-	$price = 5.99;
-	$quantity = $_POST["quantity"];
+	$x = $_POST["x"];
+	$y = $_POST["y"];
 	$total = null;
 
-	echo "<p>You have ordered <strong>{$quantity}</strong> {$item}s</p>";
-	$total = $price * $quantity;
-	echo "<p>Your total is <strong>\${$total}</strong></p>";
+//	$total = abs($x);
+//	$total = round($x);
+//	$total = floor($x);
+//	$total = ceil($x);
+	$total = pow($x, $y);
+
+	echo "<p>{$total}</p>";
 ?>
