@@ -12,28 +12,23 @@
 </head>
 
 <body>
-</body>
 	<form action="index.php" method="post">
-		<label>radius:</label>
-		<input type="text" name="radius">
-		<input type="submit" value="total">
+		<label>How old are you?</label>	
+		<input type="text" name="age">	
+		<input type="submit" value="age">	
 	</form>
+</body>
 
 </html>
 <?php
-	$r = $_POST["radius"];
-	$c = null;
+	$age = $_POST["age"];
 
-	$c = 2 * pi() * $r;
-	$c = round($c, 2);
-
-	$a = pi() * pow($r, 2);	
-	$a = round($a, 2);
-
-	$v = (4 / 2) * pi() * pow($r, 3);
-	$v = round($v, 2);
-
-	echo "<p>Circumference: {$c}cm</p>";
-	echo "<p>Area: {$a}cm<sup>2</sup></p>";
-	echo "<p>Volume: {$v}cm<sup>3</sup></p>";
+	if ($age >= 18)
+		echo "<p>You may enter this site 👍</p>";
+	elseif ($age == 0)
+		echo "<p>You're a baby 👶</p>";
+	elseif ($age < 0)
+		echo "<p>That's not a valid age 🤔</p>";
+	else
+		echo "<p>You must be 18+ to enter ⛔<p>";
 ?>
