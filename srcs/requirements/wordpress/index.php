@@ -1,3 +1,5 @@
+<?php
+?>
 <!doctype html>
 
 <html lang="en">
@@ -13,22 +15,26 @@
 
 <body>
 	<form action="index.php" method="post">
-		<label>How old are you?</label>	
-		<input type="text" name="age">	
-		<input type="submit" value="age">	
+		<label>username:</label>
+		<input type="text" name="username">
+		<label>password:</label>
+		<input type="password" name="password">
+		<br>
+		<input type="submit" name="login" value="Log_in">
 	</form>
 </body>
-
 </html>
 <?php
-	$age = $_POST["age"];
 
-	if ($age >= 18)
-		echo "<p>You may enter this site 👍</p>";
-	elseif ($age == 0)
-		echo "<p>You're a baby 👶</p>";
-	elseif ($age < 0)
-		echo "<p>That's not a valid age 🤔</p>";
-	else
-		echo "<p>You must be 18+ to enter ⛔<p>";
+	if (isset($_POST["login"]))
+	{
+		$user = $_POST["username"];
+		$pw = $_POST["password"];
+		if (empty($user))
+			echo "<p> Username is missing.</p>";
+		elseif (empty($pw))
+			echo "<p>You did not enter a password .</p>";
+		else
+			echo "<p> <strong>{$user}</strong> is your username.</p>";
+	}
 ?>
