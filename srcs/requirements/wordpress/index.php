@@ -1,4 +1,39 @@
 <?php
+	function bday($name)
+	{
+		echo "<p>Happy Birthday to you.</p>";
+		echo "<p>Happy Birthday to you.</p>";
+		echo "<p>Happy Birthday dear <strong>$name</strong>.</p>";
+		echo "<p>Happy Birthday to you.</p>";
+		echo "<br>";
+	}
+	$names = array("Joe", "Pa", "Randy", "Keith");
+
+	function is_even($n)
+	{
+		$result = $n % 2;
+		return $result;
+	}
+
+	function hypotenuse($a, $b)
+	{
+		$c = sqrt($a ** 2 + $b ** 2);
+		return $c;
+	}
+
+	function put_hypo($n)
+	{
+		echo "<p>The hypotenuse is <strong>" . round($n, 2)  . "</strong>.</p>";
+	}
+
+	$str = "All the small things work sucks I know";
+	$words = explode(" ", $str);
+
+	function read_off(array $words)
+	{
+		foreach($words as $word)
+			echo "<p><strong>{$word}</strong></p>";
+	}
 ?>
 <!doctype html>
 
@@ -15,26 +50,16 @@
 
 <body>
 	<form action="index.php" method="post">
-		<label>username:</label>
-		<input type="text" name="username">
-		<label>password:</label>
-		<input type="password" name="password">
-		<br>
-		<input type="submit" name="login" value="Log_in">
 	</form>
 </body>
 </html>
 <?php
-
-	if (isset($_POST["login"]))
+	
+	for ($i = 0; $i < 4; $i++)
 	{
-		$user = $_POST["username"];
-		$pw = $_POST["password"];
-		if (empty($user))
-			echo "<p> Username is missing.</p>";
-		elseif (empty($pw))
-			echo "<p>You did not enter a password .</p>";
-		else
-			echo "<p> <strong>{$user}</strong> is your username.</p>";
+		if (is_even($i))
+			bday($names[$i]);
 	}
+	put_hypo(hypotenuse(4, 4));
+	read_off($words);
 ?>
