@@ -49,6 +49,7 @@ p{
 	color: var(--neon_mag);
 	text-shadow: -2px -1px 5px var(--aqua_teal);
 	margin-left: 100px;
+	margin-right: 100px;
 }
 strong{
 	color: var(--aqua_teal);
@@ -107,7 +108,3 @@ button:hover{
 		opacity: 1;
 	}
 }
-
-
-
-

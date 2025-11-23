@@ -22,6 +22,10 @@ RUN mkdir -p /var/www/ft/
 COPY www.conf /etc/php83/php-fpm.d/www.conf
 
 COPY index.php /var/www/ft/index.php
+COPY about.php /var/www/ft/about.php
+COPY locations.php /var/www/ft/locations.php
+COPY header.html /var/www/ft/header.html
+COPY footer.html /var/www/ft/footer.html
 
 EXPOSE 9000
 
