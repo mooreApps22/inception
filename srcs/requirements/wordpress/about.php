@@ -17,23 +17,8 @@
 
 <body>
 	<p> This is an <strong>about</strong> page!!!</p>
-	<p> This is an <strong>about</strong> page!!!</p>
-	<p> This is an <strong>about</strong> page!!!</p>
-	<p> This is an <strong>about</strong> page!!!</p>
-	<p> This is an <strong>about</strong> page!!!</p>
-	<p> This is an <strong>about</strong> page!!!</p>
-	<p> This is an <strong>about</strong> page!!!</p>
-	<p> This is an <strong>about</strong> page!!!</p>
-	<p> This is an <strong>about</strong> page!!!</p>
-	<p> This is an <strong>about</strong> page!!!</p>
-	<p> This is an <strong>about</strong> page!!!</p>
-	<p> This is an <strong>about</strong> page!!!</p>
-	<p> This is an <strong>about</strong> page!!!</p>
-	<p> This is an <strong>about</strong> page!!!</p>
 </body>
 </html>
 <?php
-	echo "<p>{$_SESSION["username"]}</p>";
-	echo "<p>{$_SESSION["password"]}</p>";
 	include("footer.html");
 ?>

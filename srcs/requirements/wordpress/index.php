@@ -18,32 +18,16 @@
 
 <body>
 	<p>This is the login page</p>
-	<form action="index.php" method="post">
+	<form action="<?php $_SERVER["PHP_SELF"]?>" method="post">
 	<label>Username</label>
 	<input type="text" name="username">
-	<label>Password</label>
-	<input type="password" name="password">
 	<br>
 	<input id="pusher" type="submit" name="login" value="Submit">
-	<input id="pusher" type="submit" name="logout" value="Logout">
 	</form>
 </body>
 </html>
 <?php
-	if (isset($_POST["login"]))
-	{
-		if (!empty($_POST["username"]) && !empty($_POST["password"]))
-		{
-			$_SESSION["username"] = $_POST["username"];
-			$_SESSION["password"] = $_POST["password"];
-			header("Locations: about.php");
-		}
-		else
-			echo "<p>Missing username/password</p>";
-	}
-	if (isset($_POST["logout"]))
-	{
-		session_destroy();
-	}
+	if ($_SERVER["REQUEST_METHOD"] == "POST")
+		echo "<p>{$_SERVER["PHP_SELF"]}</p>";
 	include("footer.html");
 ?>

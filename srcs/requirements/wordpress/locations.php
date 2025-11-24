@@ -21,16 +21,11 @@
 	<p> This is an <strong>locations</strong> page!!!</p>
 	<p> This is an <strong>locations</strong> page!!!</p>
 	<p> This is an <strong>locations</strong> page!!!</p>
-	<p> This is an <strong>locations</strong> page!!!</p>
-	<p> This is an <strong>locations</strong> page!!!</p>
-	<p> This is an <strong>locations</strong> page!!!</p>
-	<p> This is an <strong>locations</strong> page!!!</p>
-	<p> This is an <strong>locations</strong> page!!!</p>
-	<p> This is an <strong>locations</strong> page!!!</p>
-	<p> This is an <strong>locations</strong> page!!!</p>
-	<p> This is an <strong>locations</strong> page!!!</p>
 </body>
 </html>
 <?php
+	foreach($_SERVER as $key => $value){
+		 echo"<p> {$key} = {$value}</p>";
+	}
 	include("footer.html");
 ?>
