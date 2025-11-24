@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	include("header.html");
 ?>
 <!doctype html>
@@ -32,5 +33,7 @@
 </body>
 </html>
 <?php
+	echo "<p>{$_SESSION["username"]}</p>";
+	echo "<p>{$_SESSION["password"]}</p>";
 	include("footer.html");
 ?>

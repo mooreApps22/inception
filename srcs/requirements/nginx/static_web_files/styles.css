@@ -80,25 +80,31 @@ button{
 label{
 	border: none;
 	font-family: "Press Start 2P", system-ui;
-	font-size: 50px;
+	font-size: 25px;
 	color: var(--ruby);
 	background: var(--electric_yel);
 	box-shadow: -5px -5px 5px var(--pur);
-	margin-top: 100px;
-	margin-left: auto;	
+	margin-top: 20px;
+	margin-left: 100px;	
 	margin-right: auto;	
+	width: 200px;
 	display: block;
-
-	animation-name: fade_in;
-	animation-duration: 1s;
-	animation-timing-function: ease-in-out;
-	animation-iteration-count: 1;
+}
+input{
+	margin-left: 100px;
+	width: 200px;
 }
 button:hover{
 	color: var(--neon_mag);
 	text-shadow: -2px -2px 5px var(--aqua_teal);
 	box-shadow: -5px -5px 5px var(--aqua_teal);
 	border: none;
+}
+#pusher{
+	font-family: "Press Start 2P", system-ui;
+	color: var(--neon_mag);
+	background: var(--electric_yel);
+	margin-top: 20px;
 }
 @keyframes fade_in{
 	from{
