@@ -34,6 +34,21 @@ services:
     networks:
       - inception
 
+  mariadb:
+    build: ./requirements/mariadb
+    container_name: mariadb 
+    environment:
+      DEBUG: "true"
+    env_file:
+      - ../.env
+    expose:
+      - "3306"
+    restart: always
+    networks:
+      - inception
+    volumes:
+      - ../data/mariadb:/var/lib/mysql
+
 networks:
   inception:
     driver: bridge

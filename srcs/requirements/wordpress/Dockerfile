@@ -4,6 +4,8 @@ RUN apk add --no-cache \
 	php83 \
 	php83-fpm \
 	php83-mysqli \
+	php83-pdo \
+	php83-pdo_mysql \
 	php83-session \
 	php83-json \
 	php83-opcache \
@@ -26,6 +28,7 @@ COPY about.php /var/www/ft/about.php
 COPY locations.php /var/www/ft/locations.php
 COPY header.html /var/www/ft/header.html
 COPY footer.html /var/www/ft/footer.html
+COPY database.php /var/www/ft/database.php
 
 EXPOSE 9000
 

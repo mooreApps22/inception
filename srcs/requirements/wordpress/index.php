@@ -1,7 +1,6 @@
 <?php
 	session_start();
 	include("header.html");
-
 ?>
 <!doctype html>
 
@@ -17,17 +16,10 @@
 </head>
 
 <body>
-	<p>This is the login page</p>
-	<form action="<?php $_SERVER["PHP_SELF"]?>" method="post">
-	<label>Username</label>
-	<input type="text" name="username">
-	<br>
-	<input id="pusher" type="submit" name="login" value="Submit">
-	</form>
+ <?php include("database.php"); ?>	
 </body>
 </html>
 <?php
-	if ($_SERVER["REQUEST_METHOD"] == "POST")
-		echo "<p>{$_SERVER["PHP_SELF"]}</p>";
+//	include("database.php");
 	include("footer.html");
 ?>
