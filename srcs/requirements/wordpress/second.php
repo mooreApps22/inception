@@ -1,5 +1,4 @@
 <?php
-	session_start();
 	include("header.html");
 ?>
 <!doctype html>
@@ -16,8 +15,20 @@
 </head>
 
 <body>
-	<p> This is an <strong>about</strong> page!!!</p>
-	<a href="uploads.php"><p>Uploads</p></a>
+<?php
+	$age = 34;
+	$income = 1234.5678;
+	$name = "Skyy";
+	function stats($name, $age, $income) {
+		echo "<p>Name is: $name</p>";
+		echo "<p>Age is :$age</p>";
+		echo "<p>Income in \$$income</p>";
+		if ($age >= 21)
+			echo "<p>You can drink sake!!!</p>";
+	}
+	stats($age, $income, $name);
+	
+?>
 </body>
 </html>
 <?php

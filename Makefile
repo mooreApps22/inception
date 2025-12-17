@@ -28,3 +28,7 @@ check_wordpress:
 eval_ssh_add:
 	eval "$(ssh-agent -s)"
 	ssh-add ~/.ssh/id_ed25519
+cat_Dockerfiles:
+	find . -type f -name Dockerfile 2>/dev/null | xargs cat	
+loggol:
+	./logger.sh > log.txt 2>/dev/null

@@ -14,10 +14,6 @@ RUN	apk add openssl
 RUN ["chmod", "+x", "/etc/nginx/gen_ssl.sh"]
 RUN ["/etc/nginx/gen_ssl.sh"]
 
-COPY static_web_files/index.html /var/www/ft/index.html
-COPY static_web_files/styles.css /var/www/ft/styles.css
-
-
 EXPOSE 443
 
 CMD ["nginx", "-g", "daemon off;"]

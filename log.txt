@@ -1,0 +1,268 @@
+
+
+
+
+This is a logging script to make printing what I currently have. Let me know if any other info would be useful.
+
+make logs
+make[1]: Entering directory '/home/dell/inception'
+docker compose -f ./srcs/docker-compose.yml logs
+wordpress  | [17-Dec-2025 16:47:57] NOTICE: fpm is running, pid 1
+wordpress  | [17-Dec-2025 16:47:57] NOTICE: ready to handle connections
+mariadb    | Starting MariaDB...
+mariadb    | 2025-12-17 16:47:57 0 [Note] Starting MariaDB 10.11.14-MariaDB source revision 053f9bcb5b147bf00edb99e1310bae9125b7f125 server_uid +hBnpajjIRes4m/dhhml7rU6J7o= as process 1
+mariadb    | 2025-12-17 16:47:57 0 [Note] InnoDB: Compressed tables use zlib 1.3.1
+mariadb    | 2025-12-17 16:47:57 0 [Note] InnoDB: Number of transaction pools: 1
+mariadb    | 2025-12-17 16:47:57 0 [Note] InnoDB: Using crc32 + pclmulqdq instructions
+mariadb    | 2025-12-17 16:47:57 0 [Note] mysqld: O_TMPFILE is not supported on /var/tmp (disabling future attempts)
+mariadb    | 2025-12-17 16:47:57 0 [Note] InnoDB: Using Linux native AIO
+mariadb    | 2025-12-17 16:47:57 0 [Note] InnoDB: innodb_buffer_pool_size_max=128m, innodb_buffer_pool_size=128m
+mariadb    | 2025-12-17 16:47:57 0 [Note] InnoDB: Completed initialization of buffer pool
+mariadb    | 2025-12-17 16:47:57 0 [Note] InnoDB: File system buffers for log disabled (block size=512 bytes)
+mariadb    | 2025-12-17 16:47:57 0 [Note] InnoDB: End of log at LSN=47076
+mariadb    | 2025-12-17 16:47:57 0 [Note] InnoDB: 128 rollback segments are active.
+mariadb    | 2025-12-17 16:47:57 0 [Note] InnoDB: Setting file './ibtmp1' size to 12.000MiB. Physically writing the file full; Please wait ...
+mariadb    | 2025-12-17 16:47:57 0 [Note] InnoDB: File './ibtmp1' size is now 12.000MiB.
+mariadb    | 2025-12-17 16:47:57 0 [Note] InnoDB: log sequence number 47076; transaction id 15
+mariadb    | 2025-12-17 16:47:57 0 [Note] Plugin 'FEEDBACK' is disabled.
+mariadb    | 2025-12-17 16:47:57 0 [Note] InnoDB: Loading buffer pool(s) from /var/lib/mysql/ib_buffer_pool
+mariadb    | 2025-12-17 16:47:57 0 [Note] InnoDB: Buffer pool(s) load completed at 251217 16:47:57
+mariadb    | 2025-12-17 16:47:57 0 [Note] mysqld: ready for connections.
+mariadb    | Version: '10.11.14-MariaDB'  socket: '/run/mysqld/mysqld.sock'  port: 0  Alpine Linux
+make[1]: Leaving directory '/home/dell/inception'
+
+make ps
+make[1]: Entering directory '/home/dell/inception'
+docker compose -f ./srcs/docker-compose.yml ps 
+NAME        IMAGE                 COMMAND                  SERVICE     CREATED         STATUS         PORTS
+mariadb     inception-mariadb     "/entrypoint.sh"         mariadb     6 minutes ago   Up 6 minutes   3306/tcp
+nginx       inception-nginx       "nginx -g 'daemon of…"   nginx       6 minutes ago   Up 6 minutes   0.0.0.0:443->443/tcp, [::]:443->443/tcp
+wordpress   inception-wordpress   "php-fpm83 -F"           wordpress   6 minutes ago   Up 6 minutes   9000/tcp
+make[1]: Leaving directory '/home/dell/inception'
+
+pwd
+/home/dell/inception
+
+ls
+data
+logger.sh
+log.txt
+Makefile
+secrets
+srcs
+
+srcs/docker-compose.yml
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#	
+#		INCEPTION DOCKER COMPOSE FILE	
+#
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+name: inception
+
+services:
+  nginx:
+    container_name: nginx
+    build:
+      context: ./requirements/nginx
+      args:
+        SSL_SUBJECT: ${SSL_SUBJECT}
+    environment:
+      DEBUG: "true"
+    env_file:
+      - ../.env
+    ports:
+      - "443:443"
+    depends_on:
+      - wordpress
+    restart: always
+    networks:
+      - inception
+    volumes:
+      - wordpress:/var/www/html:ro
+
+  wordpress:
+    build: ./requirements/wordpress
+    container_name: wordpress 
+    expose:
+      - "9000"
+    restart: always
+    networks:
+      - inception
+    volumes:
+      - wordpress:/var/www/html
+
+  mariadb:
+    build: ./requirements/mariadb
+    container_name: mariadb 
+    environment:
+      DEBUG: "true"
+    env_file:
+      - ../.env
+    expose:
+      - "3306"
+    restart: always
+    networks:
+      - inception
+    volumes:
+      - mariadb:/var/lib/mysql
+
+networks:
+  inception:
+    driver: bridge
+
+volumes:
+  wordpress:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/dell/inception/data/wordpress
+
+  mariadb:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/dell/inception/data/mariadb
+
+srcs/requirements/nginx/Dockerfile
+FROM alpine:3.20
+
+ARG SSL_SUBJECT
+ENV SSL_SUBJECT=${SSL_SUBJECT}
+
+RUN apk add --no-cache nginx \
+	&& mkdir -p /run/nginx /var/www/ft
+
+
+COPY utils/nginx.conf /etc/nginx/nginx.conf
+COPY utils/gen_ssl.sh /etc/nginx/gen_ssl.sh
+
+RUN	apk add openssl
+RUN ["chmod", "+x", "/etc/nginx/gen_ssl.sh"]
+RUN ["/etc/nginx/gen_ssl.sh"]
+
+EXPOSE 443
+
+CMD ["nginx", "-g", "daemon off;"]
+
+srcs/requirements/wordpress/Dockerfile
+FROM alpine:3.20
+
+RUN apk add --no-cache \
+	php83 \
+	php83-fpm \
+	php83-mysqli \
+	php83-pdo \
+	php83-pdo_mysql \
+	php83-session \
+	php83-json \
+	php83-opcache \
+	php83-mbstring \
+	php83-xml \
+	php83-curl \
+	php83-gd \
+	php83-ctype 
+
+RUN echo "display_errors = On" >> /etc/php83/php.ini
+
+RUN addgroup -S nginx && adduser -S -G nginx nginx
+
+
+COPY www.conf /etc/php83/php-fpm.d/www.conf
+
+COPY index.php /var/www/html/index.php
+COPY second.php /var/www/html/second.php
+COPY styles.css /var/www/html/styles.css
+COPY about.php /var/www/html/about.php
+COPY locations.php /var/www/html/locations.php
+COPY header.html /var/www/html/header.html
+COPY footer.html /var/www/html/footer.html
+COPY database.php /var/www/html/database.php
+COPY uploads.php /var/www/html/uploads.php
+
+EXPOSE 9000
+
+RUN mkdir -p /var/www/html/
+RUN mkdir -p /var/www/html/uploads
+RUN chown -R nginx:nginx /var/www/html/uploads
+RUN chmod 777 /var/www/html/uploads
+
+CMD ["php-fpm83", "-F"]
+
+srcs/requirements/mariadb/Dockerfile
+FROM alpine:3.20
+
+RUN apk update && apk add --no-cache mariadb mariadb-client
+
+RUN mkdir -p /run/mysqld /var/lib/mysql
+RUN chown -R mysql:mysql /run/mysqld /var/lib/mysql
+
+COPY utils/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+EXPOSE 3306
+
+ENTRYPOINT ["/entrypoint.sh"]
+
+ls data
+mariadb
+wordpress
+
+srcs/requirements/nginx/utils/nginx.conf
+events {}
+
+http {
+	include 		/etc/nginx/mime.types;
+	default_type	application/octet-stream;
+
+
+	server {
+		listen 			443 ssl;
+		server_name		smoore.42.fr;
+
+		ssl_certificate		ft_cert.crt;
+		ssl_certificate_key	ft_private.key;
+
+		ssl_protocols		TLSv1.2 TLSv1.3;
+
+		# Disable Browser Caching
+		add_header Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0";
+		add_header Pragma "no-cache";
+		add_header Expires 0;
+
+		root		/var/www/html/;
+		index		index.php index.html;
+
+		location / {
+			try_files $uri $uri/ /index.php?$args;
+		}
+
+		location ~ \.php$ {
+			include			fastcgi_params;
+			fastcgi_pass	wordpress:9000;	
+			fastcgi_index	index.php;
+			fastcgi_param	SCRIPT_FILENAME $document_root$fastcgi_script_name;
+			error_page		500 /500.html;
+		}
+	}
+}
+
+srcs/requirements/wordpress/www.conf
+[global]
+error_log = /proc/self/fd/2
+
+[www]
+user = nginx 
+group = nginx 
+
+listen = 0.0.0.0:9000
+
+pm = dynamic
+pm.max_children = 5
+pm.start_servers = 1
+pm.min_spare_servers = 1
+pm.max_spare_servers = 3
+
+clear_env = no
