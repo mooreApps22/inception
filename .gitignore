@@ -1,5 +1,5 @@
-data/mariadb/
-data/wordpress/
+data/mariadb/*
+data/wordpress/*
 log.txt
 .env
 secrets/*
