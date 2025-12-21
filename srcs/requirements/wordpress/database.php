@@ -10,11 +10,11 @@
 	ini_set('display_errors', 1);
 	mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
-	$db_server = "mariadb";
-	$db_user = "wp_user";
-	$db_pass = "wp_password";
-	$db_name = "wp_db";
-//	$conn = "";
+	$db_server = getenv('MARIADB_HOST') ?: 'mariadb';
+	$db_user =  getenv('MARIADB_USER') ?: 'wp_user';
+	$db_pass =  getenv('MARIADB_PASSWORD') ?: 'wp_password';
+	$db_name =  getenv('MARIADB_DATABASE') ?: 'wp_db';
+//	$conn = '';
 
 	try
 	{
@@ -23,7 +23,7 @@
 	}
 	catch(mysqli_sql_exception $e)
 	{
-		echo "<p>Could NOT connect to MariaDB!</p>";
+		echo "<p>You are NOT connected to MariaDB!</p>";
 		echo "<pre>" . $e->getMessage() . "</pre>";
 	}
 ?>

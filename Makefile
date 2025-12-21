@@ -32,3 +32,6 @@ cat_Dockerfiles:
 	find . -type f -name Dockerfile 2>/dev/null | xargs cat	
 loggol:
 	./logger.sh > log.txt 2>/dev/null
+git_last_commit:
+	git reset --hard HEAD
+	

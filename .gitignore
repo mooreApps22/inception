@@ -1,2 +1,4 @@
 data/mariadb/
 data/wordpress/
+logger.sh
+log.txt

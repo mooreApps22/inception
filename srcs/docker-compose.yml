@@ -37,6 +37,8 @@ services:
       - inception
     volumes:
       - wordpress:/var/www/html
+    depends_on:
+      - mariadb
 
   mariadb:
     build: ./requirements/mariadb

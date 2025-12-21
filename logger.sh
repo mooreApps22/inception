@@ -1,41 +1,66 @@
 #!/bin/bash
 
-echo
-echo
-echo
-echo
-echo 'This is a logging script to make printing what I currently have. Let me know if any other info would be useful.'
-echo
-echo 'make logs'
-make logs
-echo
-echo 'make ps'
-make ps
-echo
-echo 'pwd'
-pwd
-echo
-echo 'ls'
-ls
-echo
-echo 'srcs/docker-compose.yml'
-cat srcs/docker-compose.yml
-echo
-echo 'srcs/requirements/nginx/Dockerfile'
-cat srcs/requirements/nginx/Dockerfile
-echo
-echo 'srcs/requirements/wordpress/Dockerfile'
-cat srcs/requirements/wordpress/Dockerfile
-echo
-echo 'srcs/requirements/mariadb/Dockerfile'
-cat srcs/requirements/mariadb/Dockerfile
-echo
-echo 'ls data'
-ls data
-echo
-echo 'srcs/requirements/nginx/utils/nginx.conf'
-cat srcs/requirements/nginx/utils/nginx.conf
-echo
-echo 'srcs/requirements/wordpress/www.conf'
-cat srcs/requirements/wordpress/www.conf
+function idFiles() {
+	echo 'PWD:'
+	pwd
+	echo 'LS -L:'
+	ls -l
+	echo
+}
 
+function spit()
+{
+	echo "CATTING: $1"
+	cat $1
+}
+make
+echo
+echo
+echo
+echo
+echo
+echo
+echo
+make ps
+make logs
+idFiles
+tree -a -I .git
+ls -l .env
+spit .env
+cd data
+idFiles
+cd mariadb
+idFiles
+cd ../wordpress
+idFiles
+cd ~/inception/srcs
+idFiles
+spit docker-compose.yml
+cd requirements
+idFiles
+cd nginx
+cat Dockerfile
+cd utils
+idFiles
+spit gen_ssl.sh
+spit nginx.conf
+
+echo 'Note: my wordpress contaier is just a php-fpm container for the time being. I do not plan on adding the wordpress files until after I connect mariadb to my php documents and can interact with the database, through the php files.'
+
+cd ../../wordpress
+idFiles
+
+echo 'Note: only echoing the files I thing are relevent right now.'
+
+spit Dockerfile
+spit www.conf
+spit index.php
+spit locations.php
+spit database.php
+
+cd ../mariadb
+idFiles
+spit Dockerfile
+cd utils
+spit entrypoint.sh
+spit my.cnf

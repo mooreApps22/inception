@@ -1,12 +1,19 @@
 #!/bin/sh
 set -e
 
+chown -R mysql:mysql /run/mysqld /var/lib/mysql
+
 if [ ! -d "/var/lib/mysql/mysql" ]; then
 	echo "Initializing MariaDB data directory..."
 	mysql_install_db --user=mysql --datadir=/var/lib/mysql >/dev/null
 
 	echo "Starting temp MariaDB server for init..."
-	mysqld --user=mysql --datadir=/var/lib/mysql --skip-networking --socker=/run/mysqld/mysqld.sock & pid="$!"
+	mysqld --user=mysql \
+		--datadir=/var/lib/mysql \
+		--skip-networking \
+		--socket=/run/mysqld/mysqld.sock &
+
+	pid="$!"
 
 	echo "Waiting for MariaDB to start..."
 	until mysqladmin --socket=/run/mysqld/mysqld.sock ping --silent; do
@@ -15,7 +22,7 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
 
 	echo "Configuring initial database and user..."
 	mysql --socket=/run/mysqld/mysqld.sock -u root <<-EOSQL
-		create database if not exists /`${MARIADB_DATABASE}/`;
+		create database if not exists \`${MARIADB_DATABASE}\`;
 		create user if not exists '${MARIADB_USER}'@'%' identified by '${MARIADB_PASSWORD}';
 		grant all privileges on \`${MARIADB_DATABASE}\`.* to '${MARIADB_USER}'@'%';
 		alter user 'root'@'localhost' identified by '${MARIADB_ROOT_PASSWORD}'; 
@@ -23,9 +30,9 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
 	EOSQL
 
 	echo "Shutting down temporary MariaDB server..."
-	kill "$pid"
+	mysqladmin --socket=/run/mysqld/mysqld.sock shutdown
 	wait "$pid" 2>/dev/null || true
 fi
 
 echo "Starting MariaDB..."
-exec mysqld --user=mysql --datadir=/var/lib/mysql
+exec mysqld --user=mysql --datadir=/var/lib/mysql --bind-address=0.0.0.0 --port=3306
