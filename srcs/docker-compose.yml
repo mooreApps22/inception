@@ -32,6 +32,8 @@ services:
     container_name: wordpress 
     expose:
       - "9000"
+    env_file:
+      - ../.env
     restart: always
     networks:
       - inception

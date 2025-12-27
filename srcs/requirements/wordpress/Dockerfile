@@ -19,18 +19,9 @@ RUN echo "display_errors = On" >> /etc/php83/php.ini
 
 RUN addgroup -S nginx && adduser -S -G nginx nginx
 
-
 COPY www.conf /etc/php83/php-fpm.d/www.conf
-
-COPY index.php /var/www/html/index.php
-COPY second.php /var/www/html/second.php
-COPY styles.css /var/www/html/styles.css
-COPY about.php /var/www/html/about.php
-COPY locations.php /var/www/html/locations.php
-COPY header.html /var/www/html/header.html
-COPY footer.html /var/www/html/footer.html
-COPY database.php /var/www/html/database.php
-COPY uploads.php /var/www/html/uploads.php
+COPY . /usr/src/wordpress
+COPY entrypoint.sh /entrypoint.sh
 
 EXPOSE 9000
 
@@ -39,4 +30,5 @@ RUN mkdir -p /var/www/html/uploads
 RUN chown -R nginx:nginx /var/www/html/uploads
 RUN chmod 777 /var/www/html/uploads
 
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["php-fpm83", "-F"]
