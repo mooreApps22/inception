@@ -71,7 +71,3 @@ volumes:
 
   mariadb:
     driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /home/dell/inception/data/mariadb
