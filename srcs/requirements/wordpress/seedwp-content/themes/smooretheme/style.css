@@ -138,3 +138,27 @@ button:hover{
 #secret{
 	text-align: center;
 }
+
+.site-header{
+	text-align: center;
+	padding: 40px 20px;
+}
+
+.site-title a{
+	color: var(--neon_mag);
+}
+
+.site-description{
+	margin: 10px auto 0;
+	max-width: 900px;
+}
+
+#site-content{
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+article{
+	margin: 40px 0;
+}

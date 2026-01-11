@@ -46,4 +46,6 @@ git_last_commit:
 	git reset --hard HEAD
 reboot_mariadb:
 	sudo rm -rf data/mariadb/*
+reboot_wordpress:
+	sudo rm -rf data/wordpress/*
 	

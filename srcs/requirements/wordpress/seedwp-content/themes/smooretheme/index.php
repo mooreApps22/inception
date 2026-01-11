@@ -1,15 +1,24 @@
 <?php
+	get_header();
 ?>
-<!doctype html>
-<html <?php language_attributes(); ?>>
-<head>
-	<meta charset="<?php bloginfo('charset'); ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<?php wp_head(); ?>
-</head>
-<body <?php body_class(); ?>>
-	<h1>CSS Test</h1>
-	<p>Hello, smoore. The theme is working, if the colors are right.</p>
-	<?php  wp_footer(); ?>
-</body>
-</html>
+<main id="site-content" role="main">
+	<?php if ( have_posts() ) : ?>
+	<?php while ( have_posts() ) : the_post(); ?>
+	<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+	<h1 class="entry-title">
+		<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+	</h1>
+
+	<div class="entry-content">
+		<?php the_content(); ?>
+	</div>
+	</article>
+	<?php endwhile; ?>
+
+	<?php else : ?>
+		<h1>No post found</h1>
+		<p>CREATE a page or a post in the WP admin.</p>
+	<?php endif; ?>
+</main>
+<?php
+get_footer();
