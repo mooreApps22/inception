@@ -53,7 +53,6 @@ RUN mkdir -p /usr/src/wordpress \
 
 # OLD copy # COPY . /usr/src/wordpress
 COPY entrypoint.sh /entrypoint.sh
-COPY seedwp-content/ /usr/src/wordpress/wp-content/
 
 EXPOSE 9000
 

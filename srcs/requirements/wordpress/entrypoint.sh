@@ -86,13 +86,4 @@ then
 	wp option update comment_whitelist 0 --allow-root --path="$WP_PATH"
 fi
 
-#if [ ! -d "$WP_PATH/wp-content/themes/smooretheme" ]
-#then
-	echo "Seeding custom theme smooretheme..."
-	mkdir -p "$WP_PATH/wp-content/themes"
-	cp -a /usr/src/wordpress/wp-content/themes/smooretheme "$WP_PATH/wp-content/themes/"
-#fi
-
-wp theme activate smooretheme --allow-root --path="$WP_PATH"
-
 exec "$@"
