@@ -79,11 +79,26 @@ else
 	echo "WordPress already installed."
 fi
 
+if [ -n "${WP_USER:-}" ] && wp core is-installed --allow-root --path="$WP_PATH" >/dev/null 2>&1
+then
+	if ! wp user get "$WP_USER" --allow-root --path="$WP_PATH" >/dev/null 2>&1
+	then
+		wp user create "$WP_USER" "${WP_USER_EMAIL:-$WP_USER@example.com}" \
+			--role="${WP_USER_ROLE:-subscriber}" \
+			--user_pass="${WP_USER_PASSWORD:-}" \
+			--allow-root --path="$WP_PATH"
+	else
+		echo "User $WP_USER alredy exists."
+	fi
+fi
+
 #Auto-approve comments
 if wp core is-installed --allow-root --path="$WP_PATH" >/dev/null 2>&1
 then
 	wp option update comment_moderation 0 --allow-root --path="$WP_PATH"
 	wp option update comment_whitelist 0 --allow-root --path="$WP_PATH"
 fi
+
+
 
 exec "$@"
