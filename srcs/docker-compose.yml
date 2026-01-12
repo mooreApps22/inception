@@ -9,14 +9,14 @@ name: inception
 services:
   nginx:
     container_name: nginx
+    env_file:
+      - ../.env
     build:
       context: ./requirements/nginx
       args:
-        SSL_SUBJECT: ${SSL_SUBJECT}
+        SSL_SUBJECT: "${SSL_SUBJECT}"
     environment:
       DEBUG: "true"
-    env_file:
-      - ../.env
     ports:
       - "443:443"
     depends_on:

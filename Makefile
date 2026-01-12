@@ -16,7 +16,7 @@ restart:
 	docker compose -f $(YAM) down
 	docker compose $(ENV) -f $(YAM) up -d --build
 ps:
-	docker compose -f $(YAM) ps 
+	docker compose $(ENV) -f $(YAM) ps 
 logs:
 	docker compose -f $(YAM) logs
 logs_mariadb:
@@ -48,4 +48,11 @@ reboot_mariadb:
 	sudo rm -rf data/mariadb/*
 reboot_wordpress:
 	sudo rm -rf data/wordpress/*
-	
+test_port_80_1:
+	curl -v --max-time 3 http://smoore.42.fr/
+test_port_80_2:
+	nc -vz smoore.42.fr 80
+ls_volumes:
+	docker volume ls	
+	docker volume inspect inception_wordpress
+	docker volume inspect inception_mariadb
